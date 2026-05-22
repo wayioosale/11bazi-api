@@ -2,12 +2,25 @@ const lunisolar = require("lunisolar");
 
 module.exports = (req, res) => {
 
+  // 允许 Shopify 访问
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "*"
+  );
+
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET"
+  );
+
   const birth = req.query.birth;
 
   if (!birth) {
+
     return res.status(400).json({
       error: "Missing birth date"
     });
+
   }
 
   const solar = lunisolar(birth);
